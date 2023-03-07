@@ -34,3 +34,15 @@ func GetUserList() []*User {
 	}
 	return data
 }
+
+func CreateUser(user User) *gorm.DB {
+	return utils.DB.Create(&user)
+}
+
+func DeleteUser(user User) *gorm.DB {
+	return utils.DB.Delete(&user)
+}
+
+func UpdateUser(user User) *gorm.DB {
+	return utils.DB.Model(&user).Updates(User{Name: user.Name, PassWord: user.PassWord})
+}
