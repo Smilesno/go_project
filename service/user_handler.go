@@ -1,6 +1,8 @@
 package service
 
 import (
+	"fmt"
+	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"project/models"
@@ -67,6 +69,8 @@ func DeleteUser(c *gin.Context) {
 // @param id formData string false "用户id"
 // @param name formData string false "name"
 // @param password formData string false "password"
+// @param email formData string false "email"
+// @param phone formData string false "phone"
 // @Success      200  {string}  json{"code","message"}
 // @Router       /user/updateUser [post]
 func UpdateUser(c *gin.Context) {
@@ -74,9 +78,21 @@ func UpdateUser(c *gin.Context) {
 	id, _ := strconv.Atoi(c.PostForm("id"))
 	user.Name = c.PostForm("name")
 	user.PassWord = c.PostForm("password")
-	user.ID = uint(id)
-	models.UpdateUser(user)
-	c.JSON(http.StatusOK, gin.H{
-		"message": "更新成功",
-	})
+	user.Email = c.PostForm("email")
+	user.Phone = c.PostForm("phone")
+	fmt.Println("upate: ", user)
+
+	_, err := govalidator.ValidateStruct(user)
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(200, gin.H{
+			"message": "修改参数不匹配",
+		})
+	} else {
+		user.ID = uint(id)
+		models.UpdateUser(user)
+		c.JSON(http.StatusOK, gin.H{
+			"message": "更新成功",
+		})
+	}
 }

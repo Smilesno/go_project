@@ -30,21 +30,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/user": {
-            "get": {
-                "tags": [
-                    "用户"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "code\",\"message\"}",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/user/createUser": {
             "get": {
                 "tags": [
@@ -144,6 +129,18 @@ const docTemplate = `{
                         "type": "string",
                         "description": "password",
                         "name": "password",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "email",
+                        "name": "email",
+                        "in": "formData"
+                    },
+                    {
+                        "type": "string",
+                        "description": "phone",
+                        "name": "phone",
                         "in": "formData"
                     }
                 ],

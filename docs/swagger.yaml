@@ -10,15 +10,6 @@ paths:
             type: string
       tags:
       - 首页
-  /user:
-    get:
-      responses:
-        "200":
-          description: code","message"}
-          schema:
-            type: string
-      tags:
-      - 用户
   /user/createUser:
     get:
       parameters:
@@ -81,6 +72,14 @@ paths:
       - description: password
         in: formData
         name: password
+        type: string
+      - description: email
+        in: formData
+        name: email
+        type: string
+      - description: phone
+        in: formData
+        name: phone
         type: string
       responses:
         "200":
