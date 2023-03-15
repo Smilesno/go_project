@@ -16,9 +16,10 @@ type User struct {
 	ClientIp      string
 	Identity      string
 	ClientPort    string
-	LoginTime     time.Time
-	HeartbeatTime time.Time
-	LogOutTime    time.Time `gorm:"column:login_out_time" json:"login_out_time"`
+	Salt          string
+	LoginTime     *time.Time
+	HeartbeatTime *time.Time
+	LogOutTime    *time.Time `gorm:"column:log_out_time" json:"login_out_time"`
 	Islogout      bool
 	DeviceInfo    string
 }

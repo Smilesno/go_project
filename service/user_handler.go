@@ -4,8 +4,10 @@ import (
 	"fmt"
 	"github.com/asaskevich/govalidator"
 	"github.com/gin-gonic/gin"
+	"math/rand"
 	"net/http"
 	"project/models"
+	"project/utils"
 	"strconv"
 )
 
@@ -40,7 +42,8 @@ func CreateUser(c *gin.Context) {
 		})
 		return
 	}
-	user.PassWord = password
+	salt := fmt.Sprint("%06d", rand.Int31())
+	user.PassWord = utils.MakePassword(password, salt)
 	models.CreateUser(user)
 	c.JSON(http.StatusOK, gin.H{
 		"message": "创建成功",
